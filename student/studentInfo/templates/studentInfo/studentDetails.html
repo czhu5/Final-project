@@ -1,0 +1,49 @@
+{% extends "studentInfo/base.html" %}
+{% block content %}
+
+<br/>
+<div class="container">
+   
+<table class="table">
+        <thead>
+                <tr>
+                        <th>StudentID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Major</th>
+                        <th>YEAR</th>
+                        <th>GPA</th>
+                </tr>
+        </thead>
+        <tbody>
+                {% for  studentDetails in studentInfo %}
+                        <tr>    
+                        	    <td>{{ studentDetails.studentid }}</td>
+                                <td>{{ studentDetails.firstname }}</td>
+                                <td>{{ studentDetails.lastname }}</td>
+                                <td>{{ studentDetails.major }}</td>
+                                <td>{{ studentDetails.year }}</td>
+                                <td>{{ studentDetails.gpa }}</td>
+                        </tr>
+                {% endfor %}
+        </tbody>
+</table>
+<div>
+    <span class="step-links">
+        {% if studentDetails.has_previous %}
+            <a class='btn btn-outline-info mb-4' href="?page=1">first</a>
+            <a class='btn btn-outline-info mb-4' href="?page={{ studentDetails.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class='btn btn-outline-info mb-4' class="current">
+            Page {{ studentDetails.number }} of {{ studentDetails.paginator.num_pages }}.
+        </span>
+
+
+        {% if studentDetails.has_next %}
+            <a class='btn btn-outline-info mb-4' href="?page={{ studentDetails.next_page_number }}">next</a>
+            <a class='btn btn-outline-info mb-4' href="?page={{ studentDetails.paginator.num_pages }}">last</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "studentInfo/base.html" %}
+{% block content %}
+
+<div class="col-md-3">
+    <select id="select" style="min-width:100px">
+         {% for studentDetails in studentInfo %}
+         <option value="{{ studentDetails.lastname }}">{{ studentDetails.lastname }}</option>
+         {% endfor %}
+    </select>
+</div>
+<br/>
+<div class="col-md-3">
+    <select id="select" style="min-width:100px">
+         {% for courseDetails in courseInfo %}
+         <option value="{{ courseDetails.coursename }}">{{ courseDetails.coursename }}</option>
+         {% endfor %}
+    </select>
+</div>
+<br/>
+<div class="col-md-3">
+    <select id="select" style="min-width:100px">
+         {% for courseDetails in courseInfo %}
+         <option value="{{ courseDetails.coursename }}">{{ courseDetails.coursename }}</option>
+         {% endfor %}
+    </select>
+</div>
+<br/>
+<div class="col-md-3">
+    <select id="select" style="min-width:100px">
+         {% for courseDetails in courseInfo %}
+         <option value="{{ courseDetails.coursename }}">{{ courseDetails.coursename }}</option>
+         {% endfor %}
+    </select>
+</div>
+<div class="container">
+</br>
+<button type="button" id = #button >Click Me!</button>
+
+<script>
+ $(document).ready(function() {
+        $('#select').val("{{ request.session.student.course1.course2.course3 }}") 
+
+        $('#button').click(function(){
+            var option = $(this).find("option:selected");
+            $.ajax({
+                url: "{% url 'studentEnrollment' %}",
+                data:{
+                       student: option[0].value,
+                       course1: option[0].value,
+                       course2: option[0].value,
+                       course3: option[0].value,
+                      
+                     },
+                success: function(data)
+                    {
+                       console.log("Success")
+                       window.location = "{% url 'studentEnrollment' %}";
+                    }
+            });
+        });
+ });
+
+</script>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "studentInfo/base.html" %}
+{% block content%}
+<div>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+	<table class="table">
+	    {{ form }}
+	</table>
+	<input type="submit" value="Login">
+    </form>
+</div>
+{% endblock %}

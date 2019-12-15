@@ -1,0 +1,49 @@
+{% extends "studentInfo/base.html" %}
+{% block content %}
+
+<br/>
+<div class="container">
+   
+<table class="table">
+        <thead>
+                <tr>
+                        <th>CourseID</th>
+                        <th>Course Title</th>
+                        <th>Course Name</th>
+                        <th>Course Section Code</th>
+                        <th>Course Department</th>
+                        <th>Instructor FullName</th>
+                </tr>
+        </thead>
+        <tbody>
+                {% for  courseDetails in courseInfo %}
+                        <tr>    
+                        	    <td>{{ courseDetails.courseid }}</td>
+                                <td>{{ courseDetails.coursetitle }}</td>
+                                <td>{{ courseDetails.coursename }}</td>
+                                <td>{{ courseDetails.coursesectioncode }}</td>
+                                <td>{{ courseDetails.coursedepartment }}</td>
+                                <td>{{ courseDetails.instructorfullname }}</td>
+                        </tr>
+                {% endfor %}
+        </tbody>
+</table>
+<div>
+    <span class="step-links">
+        {% if courseDetails.has_previous %}
+            <a class='btn btn-outline-info mb-4' href="?page=1">first</a>
+            <a class='btn btn-outline-info mb-4' href="?page={{ courseDetails.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class='btn btn-outline-info mb-4' class="current">
+            Page {{ courseDetails.number }} of {{ courseDetails.paginator.num_pages }}.
+        </span>
+
+
+        {% if courseDetails.has_next %}
+            <a class='btn btn-outline-info mb-4' href="?page={{ courseDetails.next_page_number }}">next</a>
+            <a class='btn btn-outline-info mb-4' href="?page={{ courseDetails.paginator.num_pages }}">last</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}
